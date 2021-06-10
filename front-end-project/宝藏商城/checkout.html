@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>结算页面</title>
+<link type="text/css" rel="stylesheet" href="./css/style.css" >
+<style type="text/css">
+	h1 {
+		text-align: center;
+		margin-top: 200px;
+	}
+</style>
+<script type="text/javascript">
+	
+        window.onload = function() {
+		
+		var now = new Date();
+		var y = now.getFullYear();
+		var m = now.getMonth()+1;
+		var d = now.getDate();
+		var h = now.getHours();
+		var mi = now.getMinutes();
+		var s = now.getSeconds();
+		if(m<10){m="0"+m}  //处理成两位表示
+		if(d<10){d="0"+d}
+		if(h<10){h="0"+h}
+		if(mi<10){mi="0"+mi;}
+		if(s<10){s="0"+s;}
+		var str = y+m+d+h+mi+s;
+		
+		
+	var d1=document.getElementsByTagName("h1");
+		d1[0].innerHTML=str;
+    
+		
+		
+	}
+		
+</script>
+</head>
+<body>
+	
+	<div id="header">
+			<img class="logo_img" alt="" src="img/log.jpg" >
+			<span class="wel_word">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;结算</span>
+			<div>
+				<span>欢迎<span class="um_span">普通会员</span>光临宝藏商城</span>
+				<a href="order.html">我的订单</a>
+				<a href="index.html">注销</a>&nbsp;&nbsp;
+				<a href="/.html">返回</a>
+			</div>
+	</div>
+	
+	<div id="main">
+		
+		<h1>你的订单已结算，订单号为2937474382928484747</h1>
+		
+	
+	</div>
+	
+	<div id="bottom">
+		<span>
+			宝藏商城.Copyright &copy;2021
+		</span>
+	</div>
+</body>
+</html>

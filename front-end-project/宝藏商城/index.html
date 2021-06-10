@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>商城首页</title>
+		<link type="text/css" rel="stylesheet" href="./css/style.css">
+		<script style="text/javascript" src="./js/jquery-1.7.2.js"></script>
+		<script type="text/javascript">
+			$(function() {
+
+				//修改右上角登录成功的信息
+				if ("1" == localStorage.getItem("登录状态")) {
+					$("#state").text("欢迎光临");
+					$("#state").attr("href", "");
+					$("#state2").text("退出登录");
+					$("#state2").attr("href", "");
+					$("#state2").click(function() {
+						localStorage.setItem("登录状态", 0)
+					});
+
+
+
+					var sptimes = 0
+					//加入购物车按钮
+					var add = $(".add");
+					add.click(function() {
+						//所有sp2
+						var a = $(this).parent().parent().find(".sp2");
+						//alert(a[0].innerHTML + "\n" + a[1].innerHTML + "\n" + a[2].innerHTML + "\n" + a[3].innerHTML)
+						//    alert(a.toString())
+						//   var s1=""
+						//	for(var i; i<4;i++){ 
+						//  s1=s1+ String(a[i].innerHTML);	   
+						//	 }  
+
+						//设置xxx加入购物车
+						sptimes++
+						localStorage.setItem("书本", a[0].innerHTML + "," + sptimes + "," + a[2].innerHTML + "," + sptimes * a[2].innerHTML);
+						var last = $("#last");
+						last.html(a[0].innerHTML);
+
+						//库存减减
+						var store = $(this).parent().parent().find(".book_amount").find(".sp2");
+
+						store[0].innerHTML = parseInt(store[0].innerHTML) - 1;
+
+						//销量加加
+						var sales = $(this).parent().parent().find(".book_sales").find(".sp2");
+
+						sales[0].innerHTML = parseInt(sales[0].innerHTML) + 1;
+
+
+					});
+
+				} else {
+					$("#state").text("请登录");
+
+					$(".add").click(function() {
+
+						alert("请登录再添加购物车");
+					});
+
+
+				}
+
+
+				//查看购物车的信息
+				if ($("#poject").text(localStorage.getItem("商品数量")) == null) {
+					$("#poject").text(3);
+				} else {
+					$("#poject").text(localStorage.getItem("商品数量"));
+				}
+
+				//查询按钮****************
+				$("#quary").click(function() {
+					var min = $("#min").val();
+					var max = $("#max").val();
+					var bookall = $(".book_price");
+					var f = bookall.find(".sp2");
+					//重置
+					for (i = 0; i < bookall.length; i++) {
+						f[i].style.backgroundColor = "";
+
+					}
+					//显示高亮
+					for (i = 0; i < bookall.length; i++) {
+						if (min < f[i].innerHTML && max > f[i].innerHTML) {
+							f[i].style.backgroundColor = "#FFFF88";
+							//var prices = f[i].style.backgroundColor = "#FFFF88";
+							//var prices=f[i].css{"backgroundColor" ,"#FFFF88" };
+						}
+					}
+
+
+					// var prices=$(".book_price");
+					// 	for(i=0; i<prices.length; i++   ){
+					// 		i.find(".sp2")
+
+
+					// 	}
+
+
+				});
+
+
+			});
+		</script>
+	</head>
+
+	<body>
+
+		<div id="header">
+			<img class="logo_img" alt="" src="img/log.jpg">
+			<span class="wel_word">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;宝藏商城</span>
+			<div>
+				<a href="login.html" id="state">登录</a> |
+				<a href="regist.html" id="state2">注册</a> &nbsp;&nbsp;
+				<a href="cart.html">购物车</a>
+
+			</div>
+		</div>
+		<div id="main">
+			<div id="book">
+				<div class="book_cond">
+					<form action="" method="get">
+						价格：<input id="min" type="text" name="min" value=""> 元 -
+						<input id="max" type="text" name="max" value=""> 元
+						<input id="quary" type="button" value="查询" />
+					</form>
+				</div>
+				<div style="text-align: center">
+					您的购物车中有<span id="poject">3</span>件商品
+					<div>
+						您刚刚将<span style="color: red" id="last">软件测试方法和技术</span>加入到了购物车中
+					</div>
+				</div>
+				<div class="b_list">
+					<div class="img_div">
+						<a href="show.html"><img class="book_img" alt="web" src="img/web.png" titel="查看书本" /></a>
+					</div>
+					<div class="book_info">
+						<div class="book_name">
+							<span class="sp1">书名:</span>
+							<span class="sp2">web前端开发技术第三版</span>
+						</div>
+						<div class="book_author">
+							<span class="sp1">作者:</span>
+							<span class="sp2">储久良</span>
+						</div>
+						<div class="book_price">
+							<span class="sp1">价格:</span>
+							<span class="sp2">30.00</span>
+						</div>
+						<div class="book_sales">
+							<span class="sp1">销量:</span>
+							<span class="sp2">230</span>
+						</div>
+						<div class="book_amount">
+							<span class="sp1">库存:</span>
+							<span class="sp2">1000</span>
+						</div>
+						<div class="book_add">
+							<button class="add">加入购物车</button>
+							<a href="say.html">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;查看评价</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="b_list">
+					<div class="img_div">
+						<img class="book_img" alt="" src="./img/rc.jpg" />
+					</div>
+					<div class="book_info">
+						<div class="book_name">
+							<span class="sp1">书名:</span>
+							<span class="sp2">软件测试方法和技术</span>
+						</div>
+						<div class="book_author">
+							<span class="sp1">作者:</span>
+							<span class="sp2">朱少民</span>
+						</div>
+						<div class="book_price">
+							<span class="sp1">价格:</span>
+							<span class="sp2">23.00</span>
+						</div>
+						<div class="book_sales">
+							<span class="sp1">销量:</span>
+							<span class="sp2">100</span>
+						</div>
+						<div class="book_amount">
+							<span class="sp1">库存:</span>
+							<span class="sp2">500</span>
+						</div>
+						<div class="book_add">
+							<button class="add">加入购物车</button>
+						</div>
+					</div>
+				</div>
+
+				<div class="b_list">
+					<div class="img_div">
+						<img class="book_img" alt="" src="./img/pyhton.png" />
+					</div>
+					<div class="book_info">
+						<div class="book_name">
+							<span class="sp1">书名:</span>
+							<span class="sp2">python语言程序设计基础</span>
+						</div>
+						<div class="book_author">
+							<span class="sp1">作者:</span>
+							<span class="sp2">崇天</span>
+						</div>
+						<div class="book_price">
+							<span class="sp1">价格:</span>
+							<span class="sp2">10.00</span>
+						</div>
+						<div class="book_sales">
+							<span class="sp1">销量:</span>
+							<span class="sp2">10</span>
+						</div>
+						<div class="book_amount">
+							<span class="sp1">库存:</span>
+							<span class="sp2">20</span>
+						</div>
+						<div>
+							<button class="add">加入购物车</button>
+						</div>
+					</div>
+				</div>
+
+				<div class="b_list">
+					<div class="img_div">
+						<img class="book_img" alt="" src="./img/shuju.jpg" />
+					</div>
+					<div class="book_info">
+						<div class="book_name">
+							<span class="sp1">书名:</span>
+							<span class="sp2">数据仓库与数据挖掘教程</span>
+						</div>
+						<div class="book_author">
+							<span class="sp1">作者:</span>
+							<span class="sp2">老魏</span>
+						</div>
+						<div class="book_price">
+							<span class="sp1">价格:</span>
+							<span class="sp2">15.00</span>
+						</div>
+						<div class="book_sales">
+							<span class="sp1">销量:</span>
+							<span class="sp2">30</span>
+						</div>
+						<div class="book_amount">
+							<span class="sp1">库存:</span>
+							<span class="sp2">10</span>
+						</div>
+						<div class="book_add">
+							<button class="add">加入购物车</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="page_nav">
+				<a href="#">首页</a>
+				<a href="#">上一页</a>
+				<a href="#">3</a>
+				【4】
+				<a href="#">5</a>
+				<a href="#">下一页</a>
+				<a href="#">末页</a>
+				共10页，30条记录 到第<input value="4" name="pn" id="pn_input" />页
+				<input type="button" value="确定">
+			</div>
+
+		</div>
+
+		<div id="bottom">
+			<span>
+				宝藏商城.Copyright &copy;2021
+			</span>
+		</div>
+	</body>
+</html>

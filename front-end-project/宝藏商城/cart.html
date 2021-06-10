@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>购物车</title>
+
+		<link type="text/css" rel="stylesheet" href="./css/style.css">
+		<script type="text/javascript">
+			function $(id) {
+				return document.getElementById(id);
+			}
+
+			window.onload = function() {
+
+				//添加表格
+				var bookm = localStorage.getItem("书本");
+				if (bookm != null) {
+					bookarry = bookm.split(",")
+					var x = document.getElementById("tb1").insertRow(1);
+					var a = x.insertCell(0);
+					var b = x.insertCell(1);
+					var c = x.insertCell(2);
+					var d = x.insertCell(3);
+					var e = x.insertCell(4);
+
+
+					a.innerHTML = "<td>" + bookarry[0] + "</td>";
+					b.innerHTML = "<td>" + bookarry[1] + "</td>";
+					b.setAttribute("class", "nums");
+					c.innerHTML = "<td>" + bookarry[2] + "</td>";
+					d.innerHTML = "<td>" + bookarry[3] + "</td>";
+					d.setAttribute("name", "money");
+					e.innerHTML = "<td><a name='clear' href='#'>删除</a></td>";
+
+				}
+				//console.log();
+
+				//更新
+				upm();
+				ups();
+				pros();
+
+				//var clear = document.getElementById("clear");
+				//删除按钮
+				var clear = document.getElementsByName("clear");
+
+				for (var i = 0; i < clear.length; i++) {
+					clear[i].onclick = function() {
+						var tr = this.parentNode.parentNode;
+						tr.parentNode.removeChild(tr);
+						upm();
+						ups();
+						pros();
+
+					}
+
+				}
+
+				//清空购物车
+				var clean = document.getElementById("clean");
+				clean.onclick = function() {
+					var tb1 = document.getElementById("tb1");
+					//tb1.innerHTML=" "
+					tb1.innerHTML = "<tr><td>商品名称</td><td>数量</td><td>单价</td><td>金额</td><td>操作</td></tr>"
+					upm();
+					ups();
+					pros();
+				}
+
+
+				//更新金额
+				function upm() {
+					var money = document.getElementsByName("money")
+					var price = document.getElementById("b_price");
+					var p = 0;
+					for (var i = 0; i < money.length; i++) {
+						p = p + Number(money[i].innerHTML);
+					}
+					price.innerHTML = p
+				}
+
+
+				//更新商品数量
+				function ups() {
+					var count = document.getElementById("b_count");
+					var nums = document.getElementsByClassName("nums");
+					var s = 0;
+
+					for (var i = 0; i < nums.length; i++) {
+						s = s + Number(nums[i].innerHTML);
+					}
+
+					count.innerHTML = s;
+				}
+				//获取商品的件数
+				function pros() {
+					project = document.getElementById("tb1").getElementsByTagName("tr");
+					localStorage.setItem("商品数量", project.length - 1);
+				}
+
+			}
+		</script>
+	</head>
+	<body>
+
+		<div id="header">
+			<img class="logo_img" alt="" src="img/log.jpg">
+			<span class="wel_word">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;购物车</span>
+			<div>
+				<span>欢迎<span class="um_span">普通会员</span>光临宝藏商城</span>
+				<a href="order.html">我的订单</a>
+				<a href="index.html">注销</a>&nbsp;&nbsp;
+				<a href="index.html">返回</a>
+			</div>
+		</div>
+
+		<div id="main">
+
+			<table id="tb1">
+				<tr>
+					<td>商品名称</td>
+					<td>数量</td>
+					<td>单价</td>
+					<td>金额</td>
+					<td>操作</td>
+				</tr>
+				<tr>
+					<td>海贼王</td>
+					<td class="nums">4</td>
+					<td>30.00</td>
+					<td name="money">120.00</td>
+					<td><a name="clear" href="#">删除</a></td>
+				</tr>
+
+				<tr>
+					<td>火影忍者</td>
+					<td class="nums">1</td>
+					<td>10.00</td>
+					<td name="money">20.00</td>
+					<td><a name="clear" href="#">删除</a></td>
+				</tr>
+
+				<tr>
+					<td>葫芦娃</td>
+					<td class="nums">1</td>
+					<td>20.00</td>
+					<td name="money">20.00</td>
+					<td><a name="clear" href="#">删除</a></td>
+				</tr>
+
+			</table>
+
+			<div class="cart_info">
+				<span class="cart_span">购物车中共有<span id="b_count">4</span>件商品</span>
+				<span class="cart_span">总金额<span id="b_price">90.00</span>元</span>
+				<span class="cart_span"><a href="#" id="clean">清空购物车</a></span>
+				<span class="cart_span"><a href="checkout.html">去结账</a></span>
+			</div>
+
+		</div>
+
+		<div id="bottom">
+			<span>
+				宝藏商城.Copyright &copy;2021
+			</span>
+		</div>
+	</body>
+</html>

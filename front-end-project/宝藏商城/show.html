@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+		<title>查看展示</title>
+		<link type="text/css" rel="stylesheet" href="./css/style.css">
+		<style type="text/css">
+			body {
+				text-align: center;
+			}
+			
+		</style>
+		<script type="text/javascript" src="./js/jquery-1.7.2.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				$("#small").bind("mouseover mouseout mousemove", function(event) {
+					if (event.type == "mouseover") {
+						$("#showBig").show();
+					} else if (event.type == "mousemove") {
+						console.log(event);
+						$("#showBig").offset({
+							left: event.pageX + 10,
+							top: event.pageY + 10
+						});
+					} else if (event.type == "mouseout") {
+						$("#showBig").hide();
+					}
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div id="header">
+			
+			<img class="logo_img" alt="" src="./img/log.jpg" >
+			<span class="wel_word">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;查看展示</span>
+			<div>
+				<span>欢迎<span class="um_span">普通会员</span>光临宝藏商城</span>
+				<a href="order.html">我的订单</a>
+				<a href="index.html">返回</a>
+			</div>
+			
+		</div>
+		
+		
+		<div id="main">
+			<img id="small" src="./img/web_small.png" />
+			<div id="showBig">
+				<img src="./img/web_big.png">
+
+			</div>
+		</div>
+		<div id="bottom">
+			<span>
+				宝藏商城.Copyright &copy;2021
+			</span>
+		</div>
+	</body>
+</html>
